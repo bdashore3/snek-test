@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <body>
+        <p>Hello there, it's an electron app!</p>
+        <form>
+            <label for="clientId">Client Id:</label>
+            <input type="text" id="clientId" name="clientId">
+            <br />
+            <input type="submit">
+            <div id="reply"></div>
+        <form>
+        <script>
+            const {ipcRenderer, ipcMain} = require('electron');
+
+            const form = document.querySelector('form');
+            form.addEventListener('submit', submitForm);
+
+            function submitForm(e) {
+                e.preventDefault();
+
+                const clientId = document.querySelector('#clientId').value;
+                ipcRenderer.send('clientId:value', clientId);
+            }
+        </script>
+    </body>
+</html>
